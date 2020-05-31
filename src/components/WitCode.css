@@ -1,0 +1,38 @@
+.cards-witcode {
+  display: flex;
+  margin: auto;
+  width: 100%;
+}
+.card {
+  margin: auto;
+  width: 100%;
+}
+.obj {
+  width: 30%;
+  text-align: justify;
+  margin: 3%;
+}
+
+.info-witcode {
+  display: flex;
+}
+
+.btn-login {
+  background-color: #70eabe;
+  margin-bottom: 3%;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+.btn-login:hover {
+  background-color: #59bb98;
+}
+
+.topics {
+  display: flex;
+}

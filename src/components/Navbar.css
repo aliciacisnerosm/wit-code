@@ -1,0 +1,10 @@
+.navbar-btn {
+  color: #4d5656;
+  text-decoration: none;
+  margin: 3%;
+  width: 100px;
+}
+.navbar-btn:hover {
+  color: #7f8c8d;
+  text-decoration: none;
+}
