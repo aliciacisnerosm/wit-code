@@ -1,7 +1,6 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import Carousel from './Carousel';
-import { Card, Button } from 'react-bootstrap';
 import './WitCode.css';
 
 class WitCode extends Component {

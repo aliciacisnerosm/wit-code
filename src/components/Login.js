@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import './Login.css';
 class Login extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login-page">
-        <h2>Iniciar sesión</h2>
+        <h2 className="mt-5">Iniciar sesión</h2>
         <div className="user-form" id="login-user-form">
           <form className="login-form">
             <input

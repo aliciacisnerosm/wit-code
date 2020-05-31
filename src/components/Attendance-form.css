@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+.form > .submit-btn:hover {
+  background-color: #59bb98;
+  text-decoration: none;
+}
+.form > .submit-btn {
+  background-color: #70eabe;
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+label {
+    text-align: left;
+}
