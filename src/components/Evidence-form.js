@@ -15,6 +15,37 @@ class EvidenceForm extends Component {
     };
   }
 
+  componentDidMount() {
+    const url = `https://wit-code-apis.herokuapp.com/users/myinfo`;
+    let settings = {
+      method: 'GET',
+      headers: {
+        sessiontoken: localStorage.getItem('sessiontoken'),
+      }
+    };
+    fetch(url, settings)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(response.statusText);
+      })
+      .then(responseJSON => {
+        this.setState({
+          full_name: responseJSON.full_name,
+          studentId: responseJSON.studentId,
+          email: responseJSON.email,
+          user_type: responseJSON.usertype
+        });
+
+      })
+      .catch(err => {
+        console.log(err.message);
+        this.props.history.push('/wit-code/login');
+      });
+  }
+
   onChangeRegistrationNumber(e) {
     this.setState({ registration_number: e.target.value });
   }
@@ -38,7 +69,7 @@ class EvidenceForm extends Component {
       <div className="evidence-form-page">
         <h2 className="mt-5">Entregar Evidencia</h2>
         <div className="evidence-form" id="evidence-form">
-          <form className="form">
+          <form className="form" onSubmit={this.onSubmit}>
             <div className="row d-flex justify-content-center">
               <div className="col-6 mt-5">
                 <input

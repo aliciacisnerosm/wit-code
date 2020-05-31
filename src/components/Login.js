@@ -12,16 +12,55 @@ class Login extends Component {
     };
   }
 
+  handleLogin = () => {    
+    const url = `https://wit-code-apis.herokuapp.com/login`;
+
+    const data = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    const settings = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    };
+
+    fetch(url, settings)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then((responeJSON) => {
+        localStorage.setItem( 'sessiontoken', responeJSON.sessiontoken );
+        this.props.history.goBack();
+      })
+      .catch((err) => {
+        console.log(err.message);
+        this.setState({
+          errorMessage : err.message
+        })
+      });
+  };
+
   onChangeEmail(e) {
     this.setState({ email: e.target.value });
+    console.log(this.state)
   }
 
   onChangePassword(e) {
     this.setState({ password: e.target.value });
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state);
+
+    this.handleLogin();
 
     this.setState({
       email: '',
@@ -34,7 +73,7 @@ class Login extends Component {
       <div className="login-page">
         <h2 className="mt-5">Iniciar sesión</h2>
         <div className="user-form" id="login-user-form">
-          <form className="login-form">
+          <form onSubmit= {this.onSubmit} className="login-form">
             <input
               id="email"
               type="email"
@@ -54,7 +93,7 @@ class Login extends Component {
             />
             <br></br>
 
-            <button className="login-btn">Iniciar Sesión</button>
+            <button type="sumbit" className="login-btn">Iniciar Sesión</button>
           </form>
         </div>
       </div>

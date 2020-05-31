@@ -4,6 +4,57 @@ import Carousel from './Carousel';
 import './WitCode.css';
 
 class WitCode extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      login_status : false,
+      btn_login_link : '/wit-code/login',
+    };
+
+  }
+  
+  componentDidMount() {
+    const url = `https://wit-code-apis.herokuapp.com/users/myinfo`;
+    let settings = {
+      method: 'GET',
+      headers: {
+        sessiontoken: localStorage.getItem('sessiontoken'),
+      }
+    };
+    fetch(url, settings)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(response.statusText);
+      })
+      .then(responseJSON => {
+        this.setState({
+          full_name: responseJSON.full_name,
+          studentId: responseJSON.studentId,
+          email: responseJSON.email,
+          user_type: responseJSON.usertype,
+          login_status : true,
+          btn_login_link : '/wit-code/evidence-form',
+        });
+
+      })
+      .catch(err => {
+        console.log(err.message);
+        //this.props.history.push('/wit-code/login');
+      });
+  }
+
+  displayButtonLogin = () => {
+    if(this.state.login_status){
+      return "Entregar evidencias";
+    }
+    else{
+      return "Iniciar sesión";
+    }
+  }
+
   render() {
     return (
       <div>
@@ -40,8 +91,8 @@ class WitCode extends Component {
           </div>
         </div>
         <h2>¿Quieres entregar una evidencia?</h2>
-        <Link to={'/wit-code/login'}>
-          <button className="btn-login">Iniciar sesión</button>
+        <Link to={this.state.btn_login_link}>
+          <button className="btn-login">{this.displayButtonLogin()}</button>
         </Link>
       </div>
     );
