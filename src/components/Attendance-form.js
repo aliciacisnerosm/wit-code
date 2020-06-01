@@ -73,6 +73,7 @@ class AttendanceForm extends Component {
                 <input
                   id="registration-number"
                   type="text"
+                  value={this.state.studentId}
                   onChange={this.onChangeRegistrationNumber}
                   placeholder="Matricula"
                   required
