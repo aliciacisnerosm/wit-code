@@ -46,6 +46,36 @@ class EvidenceForm extends Component {
       });
   }
 
+  sendEvidence() {
+    const url = `https://wit-code-apis.herokuapp.com/`; // users? evidence? attendance??
+    let data = {
+      registration_number : this.state.registration_number,
+      link: this.state.evidence_link,
+      date : new Date(),      
+    }
+    let settings = {
+      method: 'POST', //también puede ser patch
+      headers: {
+        sessiontoken: localStorage.getItem('sessiontoken'),
+      }
+    };
+    fetch(url, settings)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(response.statusText);
+      })
+      .then(responseJSON => {
+        
+      })
+      .catch(err => {
+        console.log(err.message);
+        this.props.history.push('/wit-code/attendance-form');
+      });
+  }
+
   onChangeRegistrationNumber(e) {
     this.setState({ registration_number: e.target.value });
   }
@@ -75,7 +105,7 @@ class EvidenceForm extends Component {
                 <input
                   id="registration-number"
                   type="text"
-                  onChange={this.onChangeRegistrationNumber}
+                  onChange={this.onChangeRegistrationNumber()}
                   placeholder="Matricula"
                   required
                 />
