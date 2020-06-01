@@ -38,7 +38,7 @@ class EvidenceForm extends Component {
       })
       .catch(err => {
         console.log(err.message);
-        this.props.history.push('/wit-code/login');
+        this.props.history.push('/login');
       });
   }
 
@@ -68,7 +68,7 @@ class EvidenceForm extends Component {
       })
       .catch(err => {
         console.log(err.message);
-        this.props.history.push('/wit-code/attendance-form');
+        this.props.history.push('/attendance-form');
       });
   }
 
@@ -82,6 +82,8 @@ class EvidenceForm extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    
+    //this.sendEvidence
 
     this.setState({
       registration_number: "",

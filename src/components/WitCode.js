@@ -8,7 +8,7 @@ class WitCode extends Component {
     super(props);
     this.state = {
       login_status : false,
-      btn_login_link : '/wit-code/login',
+      btn_login_link : '/login',
     };
 
   }
@@ -36,13 +36,13 @@ class WitCode extends Component {
           email: responseJSON.email,
           user_type: responseJSON.usertype,
           login_status : true,
-          btn_login_link : '/wit-code/evidence-form',
+          btn_login_link : '/evidence-form',
         });
 
       })
       .catch(err => {
         console.log(err.message);
-        //this.props.history.push('/wit-code/login');
+        //this.props.history.push('/login');
       });
   }
 

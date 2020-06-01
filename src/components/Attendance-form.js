@@ -37,7 +37,7 @@ class AttendanceForm extends Component {
       })
       .catch(err => {
         console.log(err.message);
-        this.props.history.push('/wit-code/login');
+        this.props.history.push('/login');
       });
   }
 
