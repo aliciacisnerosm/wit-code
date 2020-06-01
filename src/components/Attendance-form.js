@@ -3,19 +3,11 @@ import "./Attendance-form.css";
 class AttendanceForm extends Component {
   constructor(props) {
     super(props);
-    this.onChangeRegistrationNumber = this.onChangeRegistrationNumber.bind(
-      this
-    );
     this.onChangeAttendance = this.onChangeAttendance.bind(this);
 
     this.state = {
-      registration_number: "",
       attendance_link: "",
     };
-  }
-
-  onChangeRegistrationNumber(e) {
-    this.setState({ registration_number: e.target.value });
   }
 
   onChangeAttendance(e) {
@@ -37,17 +29,6 @@ class AttendanceForm extends Component {
         <h2 className="mt-5">Entregar Asistenica</h2>
         <div className="attendance-form" id="attendance-form">
           <form className="form">
-            <div className="row d-flex justify-content-center">
-              <div className="col-6 mt-5">
-                <input
-                  id="registration-number"
-                  type="text"
-                  onChange={this.onChangeRegistrationNumber}
-                  placeholder="Matricula"
-                  required
-                />
-              </div>
-            </div>
 
             <div className="row d-flex justify-content-center">
               <div className="col-6 mt-5">

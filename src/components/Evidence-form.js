@@ -4,23 +4,14 @@ import "./Evidence-form.css";
 class EvidenceForm extends Component {
   constructor(props) {
     super(props);
-    this.onChangeRegistrationNumber = this.onChangeRegistrationNumber.bind(
-      this
-    );
     this.onChangeFile = this.onChangeFile.bind(this);
 
     this.state = {
-      registration_number: "",
       evidence: "",
     };
   }
 
-  onChangeRegistrationNumber(e) {
-    this.setState({ registration_number: e.target.value });
-  }
-
   onChangeFile(e) {
-    console.log(e.target.value);
     this.setState({ evidence: e.target.value });
   }
 
@@ -39,18 +30,6 @@ class EvidenceForm extends Component {
         <h2 className="mt-5">Entregar Evidencia</h2>
         <div className="evidence-form" id="evidence-form">
           <form className="form">
-            <div className="row d-flex justify-content-center">
-              <div className="col-6 mt-5">
-                <input
-                  id="registration-number"
-                  type="text"
-                  onChange={this.onChangeRegistrationNumber}
-                  placeholder="Matricula"
-                  required
-                />
-              </div>
-            </div>
-
             <div className="row d-flex justify-content-center">
               <div className="col-6 mt-5">
                 <Form.File
