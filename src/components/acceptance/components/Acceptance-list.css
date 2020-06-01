@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input {
+  max-height: 38px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+.react-datepicker-wrapper {
+  display: block !important;
+}
+
+.btn-primary {
+  background-color: #59bb98 !important;
+  border-color: #59bb98 !important;
+  color: #ededed !important;
+}
+
+.active {
+  background-color: #70eabe !important;
+  color: #fff !important;
+}

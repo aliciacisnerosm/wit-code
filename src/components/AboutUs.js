@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Carousel from './Carousel';
 
 import './AboutUs.css';
 class AboutUs extends Component {

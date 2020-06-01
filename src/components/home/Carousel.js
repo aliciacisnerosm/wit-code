@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   MDBCarousel,
-  MDBCarouselCaption,
   MDBCarouselInner,
   MDBCarouselItem,
   MDBView,
@@ -27,6 +26,7 @@ const Carousel = () => {
                 <img
                   className="d-block w-100"
                   src="https://wit-code.s3.amazonaws.com/wit-1.jpg"
+                  alt=""
                 />
                 <MDBMask overlay="black-strong" />
               </MDBView>
@@ -36,6 +36,7 @@ const Carousel = () => {
                 <img
                   className="d-block w-100"
                   src="https://wit-code.s3.amazonaws.com/IMG_6701.jpeg"
+                  alt=""
                 />
                 <MDBMask overlay="black-strong" />
               </MDBView>
@@ -45,6 +46,7 @@ const Carousel = () => {
                 <img
                   className="d-block w-100"
                   src="https://wit-code.s3.amazonaws.com/IMG_6908.jpeg"
+                  alt=""
                 />
                 <MDBMask overlay="black-strong" />
               </MDBView>
