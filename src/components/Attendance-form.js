@@ -3,13 +3,9 @@ import "./Attendance-form.css";
 class AttendanceForm extends Component {
   constructor(props) {
     super(props);
-    this.onChangeRegistrationNumber = this.onChangeRegistrationNumber.bind(
-      this
-    );
     this.onChangeAttendance = this.onChangeAttendance.bind(this);
 
     this.state = {
-      registration_number: "",
       attendance_link: "",
     };
   }
@@ -67,19 +63,7 @@ class AttendanceForm extends Component {
       <div className="attendance-form-page">
         <h2 className="mt-5">Entregar Asistenica</h2>
         <div className="attendance-form" id="attendance-form">
-          <form onSubmit={this.onSubmit} className="form">
-            <div className="row d-flex justify-content-center">
-              <div className="col-6 mt-5">
-                <input
-                  id="registration-number"
-                  type="text"
-                  value={this.state.studentId}
-                  onChange={this.onChangeRegistrationNumber}
-                  placeholder="Matricula"
-                  required
-                />
-              </div>
-            </div>
+          <form className="form">
 
             <div className="row d-flex justify-content-center">
               <div className="col-6 mt-5">

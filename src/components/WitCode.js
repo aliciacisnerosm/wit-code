@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
-import Carousel from './Carousel';
+import Carousel from './home/Carousel';
 import './WitCode.css';
 
 class WitCode extends Component {

@@ -26,11 +26,20 @@ class NavbarApp extends Component {
             <Link key={3} as={Link} className={'navbar-btn'} to={'/wit-code'}>
               Wit Code
             </Link>
-            <Link key={4} as={Link} className={'navbar-btn-big'} to={'/wit-code/evidence-form'}>
+            <Link key={4} as={Link} className={'navbar-btn-big'} to={'/evidence-form'}>
               Subir Evidencia
             </Link>
-            <Link key={5} as={Link} className={'navbar-btn-big'} to={'/wit-code/attendance-form'}>
+            <Link key={5} as={Link} className={'navbar-btn-big'} to={'/attendance-form'}>
               Subir Asistencia
+            </Link>
+            <Link key={6} as={Link} className={'navbar-btn-big'} to={'/evidence-list'}>
+              Lista Evidencias
+            </Link>
+            <Link key={7} as={Link} className={'navbar-btn-big'} to={'/attendance-list'}>
+              Lista Asistencias
+            </Link>
+            <Link key={8} as={Link} className={'navbar-btn ml-auto'} to={'/login'}>
+              Iniciar Sesion
             </Link>
           </Nav>
         </Navbar.Collapse>
