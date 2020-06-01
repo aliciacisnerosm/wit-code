@@ -5,6 +5,7 @@ export default class EvidenceList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      context : '',
       list: [
         {
           name: "David Martinez",
@@ -25,7 +26,7 @@ export default class EvidenceList extends React.Component {
   render() {
     return (
       <div>
-        <AcceptanceList key={10} list={this.state.list} />
+        <AcceptanceList key={10} list={this.state.list} context={this.state.context} />
       </div>
     );
   }

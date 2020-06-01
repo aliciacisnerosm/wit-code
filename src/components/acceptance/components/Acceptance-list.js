@@ -15,18 +15,63 @@ class AcceptanceList extends Component {
     super(props);
     this.onChangeNameFilter = this.onChangeNameFilter.bind(this);
     this.onChangeDateFilter = this.onChangeDateFilter.bind(this);
-
+    this.chargeData = this.chargeData.bind(this);
     this.state = {
       name: "",
       date: new Date(),
       list: props.list ? props.list : [],
+      context: props.context ? props.context : '',
     };
+    this.chargeData();
+  }
+
+  chargeData() {
+    const url = `https://wit-code-apis.herokuapp.com/users/tutor/` + this.state.context;
+    let settings = {
+      method: 'GET',
+      headers: {
+        sessiontoken: localStorage.getItem('sessiontoken'),
+      }
+    };
+    fetch(url, settings)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(response.statusText);
+      })
+      .then(responseJSON => {
+        /*this.state.list = responseJSON.map(user => {
+          return {
+            name: user.full_name,
+            date: new Date(),
+            link: user.studentId,
+          }
+        })*/
+        this.setState({list: []});
+        responseJSON.map((user, index) => {
+          this.setState(state => {
+            const list = [...state.list, { name: user.full_name, accepted: 0, date: new Date() }];
+            return {
+              list,
+              value: '',
+            };
+          });
+          return user;
+        })
+
+      })
+      .catch(err => {
+        console.log(err.message);
+        //this.props.history.push('/login');
+      });
   }
 
   onChangeNameFilter(e) {
     this.setState({ name: e.target.value });
   }
-  
+
   onChangeDateFilter(e) {
     this.setState({ date: e });
   }

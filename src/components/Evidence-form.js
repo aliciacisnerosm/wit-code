@@ -53,7 +53,8 @@ class EvidenceForm extends Component {
       method: 'POST', //también puede ser patch
       headers: {
         sessiontoken: localStorage.getItem('sessiontoken'),
-      }
+      },
+      body : JSON.stringify(data),
     };
     fetch(url, settings)
       .then(response => {
@@ -68,7 +69,7 @@ class EvidenceForm extends Component {
       })
       .catch(err => {
         console.log(err.message);
-        this.props.history.push('/attendance-form');
+        this.props.history.push('/evidence-form');
       });
   }
 
