@@ -1,0 +1,8 @@
+#user {
+  width: 30%;
+  margin: 3%;
+  border: none;
+}
+input[type='radio'] {
+  margin-right: 3px;
+}

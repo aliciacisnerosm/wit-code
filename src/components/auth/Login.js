@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './Login.css';
+import { Link } from 'react-router-dom';
+
+import axios from 'axios';
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       email: '',
@@ -58,7 +63,24 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    this.handleLogin();
+    let user = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    axios
+      .post('https://wit-code-apis.herokuapp.com/login', user)
+      .then((res) => {
+        console.log(res);
+        alert('res', res);
+        localStorage.setItem('sessiontoken', res.data.sessiontoken);
+        localStorage.setItem('user', res.data.user);
+        this.props.history.push('/wit-code/');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('error', error);
+      });
 
     this.setState({
       email: '',
@@ -91,7 +113,10 @@ class Login extends Component {
             />
             <br></br>
 
-            <button className="login-btn">Iniciar Sesión</button>
+            <button onClick={this.onSubmit} className="login-btn">
+              Iniciar Sesión
+            </button>
+            {/* <p>¿Aún no tienes cuenta? <Link to={'/wit-code/create-user'}>Crea un usuario aquí</Link></p> */}
           </form>
         </div>
       </div>
