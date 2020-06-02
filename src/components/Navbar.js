@@ -4,6 +4,16 @@ import './Navbar.css';
 import { Navbar, Nav } from 'react-bootstrap';
 
 class NavbarApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {},
+      password: '',
+    };
+  }
+  componentWillMount(){
+    this.setState({})
+  }
   render() {
     return (
       <Navbar bg="light" expand="lg">
@@ -26,13 +36,36 @@ class NavbarApp extends Component {
             <Link key={3} as={Link} className={'navbar-btn'} to={'/wit-code'}>
               Wit Code
             </Link>
-            <Link key={4} as={Link} className={'navbar-btn-big'} to={'/wit-code/evidence-form'}>
+            <Link
+              key={4}
+              as={Link}
+              className={'navbar-btn-big'}
+              to={'/wit-code/evidence-form'}
+            >
               Subir Evidencia
             </Link>
-            <Link key={5} as={Link} className={'navbar-btn-big'} to={'/wit-code/attendance-form'}>
+            <Link
+              key={5}
+              as={Link}
+              className={'navbar-btn-big'}
+              to={'/wit-code/attendance-form'}
+            >
               Subir Asistencia
             </Link>
-            <Link key={6} as={Link} className={'navbar-btn ml-auto'} to={'/wit-code/login'}>
+            <Link
+              key={6}
+              as={Link}
+              className={'navbar-btn-big'}
+              to={'/wit-code/calendar'}
+            >
+              Calendario
+            </Link>
+            <Link
+              key={7}
+              as={Link}
+              className={'navbar-btn ml-auto'}
+              to={'/wit-code/login'}
+            >
               Iniciar Sesion
             </Link>
           </Nav>
