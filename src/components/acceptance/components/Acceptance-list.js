@@ -26,7 +26,7 @@ class AcceptanceList extends Component {
   onChangeNameFilter(e) {
     this.setState({ name: e.target.value });
   }
-  
+
   onChangeDateFilter(e) {
     this.setState({ date: e });
   }
@@ -105,7 +105,13 @@ class AcceptanceList extends Component {
                     <span>{item.name}</span>
                   </div>
                   <div className="col-5">
-                    <span>{item.link}</span>
+                    <a
+                      href={item.link}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {item.link}
+                    </a>
                   </div>
                   <div className="col-2">
                     <span>{item.date.toLocaleDateString("en-GB")}</span>
@@ -123,29 +129,6 @@ class AcceptanceList extends Component {
                 </div>
               </ListGroup.Item>
             ))}
-            {/* <ListGroup.Item className="p-0 py-3">
-              <div className="row m-0">
-                <div className="col-3">
-                  <span>Nombre</span>
-                </div>
-                <div className="col-5">
-                  <span>Link</span>
-                </div>
-                <div className="col-2">
-                  <span>Fecha</span>
-                </div>
-                <div className="col-2">
-                  <ToggleButtonGroup
-                    type="radio"
-                    name="options"
-                    defaultValue={1}
-                  >
-                    <ToggleButton value={0}>Si</ToggleButton>
-                    <ToggleButton value={1}>No</ToggleButton>
-                  </ToggleButtonGroup>
-                </div>
-              </div>
-            </ListGroup.Item> */}
           </ListGroup>
         </div>
       </div>

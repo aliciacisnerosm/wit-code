@@ -81,7 +81,7 @@ class Login extends Component {
             <button onClick={this.onSubmit} className="login-btn">
               Iniciar Sesión
             </button>
-            <p>¿Aún no tienes cuenta? <Link to={'/wit-code/create-user'}>Crea un usuario aquí</Link></p>
+            {/* <p>¿Aún no tienes cuenta? <Link to={'/wit-code/create-user'}>Crea un usuario aquí</Link></p> */}
           </form>
         </div>
       </div>
