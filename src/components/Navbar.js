@@ -13,17 +13,18 @@ class NavbarApp extends Component {
       showLists: false,
       showCreateUser: false,
       showLogin: true,
-      showLogout: false
+      showLogout: false,
     };
     this.onClickLogout = this.onClickLogout.bind(this);
     //this.onChangeEmail = this.onChangeEmail.bind(this);
-
   }
   componentWillMount() {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem("user"));
     let showForms = false;
     let showLists = false;
     let showCreateUser = false;
+    let showLogin = true;
+    let showLogout = false;
     console.log("this is the user:", user);
     console.log(user?.user_type);
     if (user?.user_type === 1) {
@@ -36,9 +37,9 @@ class NavbarApp extends Component {
       showCreateUser = true;
     }
 
-    if(user){
-      this.state.showLogin = false;
-      this.state.showLogout = true;
+    if (user) {
+      showLogin = false;
+      showLogout = true;
     }
 
     this.setState({
@@ -46,13 +47,17 @@ class NavbarApp extends Component {
       showForms,
       showLists,
       showCreateUser,
+      showLogin,
+      showLogout,
     });
   }
 
   onClickLogout(e) {
     localStorage.clear();
-    this.state.showLogin = true;
-    this.state.showLogout = false;
+    this.setState({
+      showLogin: true,
+      showLogout: false,
+    });
   }
 
   render() {
