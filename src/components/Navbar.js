@@ -121,14 +121,14 @@ class NavbarApp extends Component {
               as={Link}
               className={"navbar-btn ml-auto"}
               to={"/wit-code/login"}
-              hidden={this.state.user?.sessiontoken}
+              hidden={this.state.sessiontoken}
             >
               Iniciar Sesion
             </Link>
             <button
               className="navbar-btn ml-auto"
-              onClick={this.logout()}
-              hidden={!this.state.user?.sessiontoken}
+              onClick={this.logout}
+              hidden={!this.state.sessiontoken}
             >
               Cerrar Sesion
             </button>

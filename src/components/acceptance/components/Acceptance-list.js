@@ -26,6 +26,7 @@ class AcceptanceList extends Component {
   }
 
   chargeData() {
+    console.log("what")
     const url = `https://wit-code-apis.herokuapp.com/users/tutor/` + this.state.context;
     let settings = {
       method: 'GET',

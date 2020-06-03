@@ -17,7 +17,7 @@ class CreateUser extends Component {
       full_name: '',
       email: '',
       password: '',
-      user_type: '',
+      user_type: 1,
       active: false,
     };
   }
@@ -56,27 +56,29 @@ class CreateUser extends Component {
       active: this.state.active,
     };
 
+    //console.log(newUser);
     axios
       .post('https://wit-code-apis.herokuapp.com/users/', newUser, {
         headers: { sessiontoken: localStorage.getItem('sessiontoken') },
       })
       .then((res) => {
-        alert(res);
-        // localStorage.setItem('sessiontoken', res.data.token);
-        this.props.history.push('/wit-code/');
+        alert("Usuario creado con exito");
+        //localStorage.setItem('sessiontoken', res.data.token);
+        //this.props.history.push('/wit-code/create-user');
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    this.setState({
+    /*this.setState({
       studentId: '',
       full_name: '',
       email: '',
       password: '',
       user_type: '',
       active: false,
-    });
+    });*/
   }
 
   render() {

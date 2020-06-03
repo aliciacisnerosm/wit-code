@@ -43,11 +43,12 @@ class EvidenceForm extends Component {
   }
 
   sendEvidence() {
-    const url = `https://wit-code-apis.herokuapp.com/`; // users? evidence? attendance??
+    const url = `https://wit-code-apis.herokuapp.com/entregas`; // users? evidence? attendance??
     let data = {
       registration_number : this.state.registration_number,
       link: this.state.evidence_link,
-      date : new Date(),      
+      date : new Date(),
+      entrega_type: 'evidence',   
     }
     let settings = {
       method: 'POST', //también puede ser patch

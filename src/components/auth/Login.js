@@ -40,8 +40,8 @@ class Login extends Component {
         }
         throw new Error(response.statusText);
       })
-      .then((responeJSON) => {
-        localStorage.setItem( 'sessiontoken', responeJSON.sessiontoken );
+      .then((responseJSON) => {
+        localStorage.setItem( 'sessiontoken', responseJSON.sessiontoken );
         this.props.history.goBack();
       })
       .catch((err) => {
@@ -71,9 +71,8 @@ class Login extends Component {
     axios
       .post('https://wit-code-apis.herokuapp.com/login', user)
       .then((res) => {
-        console.log(res);
-        alert('res', res);
         localStorage.setItem('sessiontoken', res.data.sessiontoken);
+        alert('res', res.message);
         localStorage.setItem('user', res.data.user);
         this.props.history.push('/wit-code/');
       })

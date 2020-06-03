@@ -41,6 +41,38 @@ class AttendanceForm extends Component {
       });
   }
 
+  sendAttendance() {
+    const url = `https://wit-code-apis.herokuapp.com/entregas`; // users? evidence? attendance??
+    let data = {
+      registration_number : this.state.registration_number,
+      link: this.state.evidence_link,
+      date : new Date(),
+      entrega_type: 'atendance',   
+    }
+    let settings = {
+      method: 'POST', //también puede ser patch
+      headers: {
+        sessiontoken: localStorage.getItem('sessiontoken'),
+      },
+      body : JSON.stringify(data),
+    };
+    fetch(url, settings)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(response.statusText);
+      })
+      .then(responseJSON => {
+        
+      })
+      .catch(err => {
+        console.log(err.message);
+        this.props.history.push('/evidence-form');
+      });
+  }
+
   onChangeRegistrationNumber(e) {
     this.setState({ registration_number: e.target.value });
   }
