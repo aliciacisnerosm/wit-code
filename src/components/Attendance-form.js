@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "./Attendance-form.css";
 class AttendanceForm extends Component {
   constructor(props) {
     super(props);
     this.onChangeAttendance = this.onChangeAttendance.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       attendance_link: "",
@@ -11,14 +13,33 @@ class AttendanceForm extends Component {
   }
 
   onChangeAttendance(e) {
+    console.log(e.target.value);
     this.setState({ attendance_link: e.target.value });
+    console.log(this.state);
   }
 
   onSubmit(e) {
     e.preventDefault();
 
+    const newAttendance = {
+      link: this.state.attendance_link,
+      entrega_type: "attendance",
+    };
+
+    axios
+      .post("https://wit-code-apis.herokuapp.com/entregas/", newAttendance, {
+        headers: { sessiontoken: localStorage.getItem("sessiontoken") },
+      })
+      .then((res) => {
+        // alert(res.user);
+        // localStorage.setItem('sessiontoken', res.data.token);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     this.setState({
-      registration_number: "",
       attendance_link: "",
     });
   }
@@ -29,7 +50,6 @@ class AttendanceForm extends Component {
         <h2 className="mt-5">Entregar Asistenica</h2>
         <div className="attendance-form" id="attendance-form">
           <form className="form">
-
             <div className="row d-flex justify-content-center">
               <div className="col-6 mt-5">
                 <input
@@ -42,7 +62,10 @@ class AttendanceForm extends Component {
               </div>
             </div>
 
-            <button className="submit-btn mt-5 p-3 flex-center">
+            <button
+              onClick={this.onSubmit}
+              className="submit-btn mt-5 p-3 flex-center"
+            >
               Subir Asistencia
             </button>
           </form>

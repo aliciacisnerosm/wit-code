@@ -61,7 +61,7 @@ class CreateUser extends Component {
         headers: { sessiontoken: localStorage.getItem('sessiontoken') },
       })
       .then((res) => {
-        alert(res);
+        // alert(res.user);
         // localStorage.setItem('sessiontoken', res.data.token);
         this.props.history.push('/wit-code/');
       })
@@ -144,7 +144,7 @@ class CreateUser extends Component {
             <label htmlFor="user" className="label-form">
               Rol
             </label>
-            <select onChange={this.onChangeUserType} id="user">
+            <select onChange={this.onChangeUserType} id="user" defaultValue="1">
               <option value="1">Tutor</option>
               <option value="2">Coordinador</option>
               <option value="3">Admin General</option>

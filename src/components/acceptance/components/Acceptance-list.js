@@ -6,6 +6,7 @@ import {
   ToggleButtonGroup,
 } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import axios from "axios";
 
 import "./Acceptance-list.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -23,6 +24,12 @@ class AcceptanceList extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.list !== this.props.list) {
+      this.setState({ list: this.props.list });
+    }
+  }
+
   onChangeNameFilter(e) {
     this.setState({ name: e.target.value });
   }
@@ -30,6 +37,25 @@ class AcceptanceList extends Component {
   onChangeDateFilter(e) {
     this.setState({ date: e });
   }
+
+  onChangeAcceptance = (accepted, _id) => {
+    const updatedAcceptance = {
+      _id,
+      accepted
+    }
+    axios
+      .patch("https://wit-code-apis.herokuapp.com/entregas/", updatedAcceptance,{
+        headers: { sessiontoken: localStorage.getItem("sessiontoken") },
+      })
+      .then((res) => {
+        // alert(res.user);
+        // localStorage.setItem('sessiontoken', res.data.token);
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   onSubmit(e) {
     e.preventDefault();
@@ -95,40 +121,43 @@ class AcceptanceList extends Component {
             </div>
           </div>
           <ListGroup>
-            {this.state.list.map((item, index) => (
-              <ListGroup.Item
-                key={index + "-" + item.date.toLocaleDateString("en-GB")}
-                className="p-0 py-3"
-              >
-                <div className="row m-0">
-                  <div className="col-3">
-                    <span>{item.name}</span>
+            {this.state.list.map((item, index) => {
+              const date = new Date(item.date);
+              return (
+                <ListGroup.Item key={index} className="p-0 py-3">
+                  <div className="row m-0">
+                    <div className="col-3">
+                      <span>{item.user.full_name}</span>
+                    </div>
+                    <div className="col-5">
+                      <a
+                        href={item.link}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {item.link}
+                      </a>
+                    </div>
+                    <div className="col-2">
+                      <span>{date.toLocaleDateString("en-GB")}</span>
+                    </div>
+                    <div className="col-2">
+                      <ToggleButtonGroup
+                        type="radio"
+                        name="options"
+                        defaultValue={item.accepted}
+                        onChange={(event) =>
+                          this.onChangeAcceptance(event, item._id)
+                        }
+                      >
+                        <ToggleButton value={true}>Si</ToggleButton>
+                        <ToggleButton value={false}>No</ToggleButton>
+                      </ToggleButtonGroup>
+                    </div>
                   </div>
-                  <div className="col-5">
-                    <a
-                      href={item.link}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {item.link}
-                    </a>
-                  </div>
-                  <div className="col-2">
-                    <span>{item.date.toLocaleDateString("en-GB")}</span>
-                  </div>
-                  <div className="col-2">
-                    <ToggleButtonGroup
-                      type="radio"
-                      name="options"
-                      defaultValue={item.accepted}
-                    >
-                      <ToggleButton value={0}>Si</ToggleButton>
-                      <ToggleButton value={1}>No</ToggleButton>
-                    </ToggleButtonGroup>
-                  </div>
-                </div>
-              </ListGroup.Item>
-            ))}
+                </ListGroup.Item>
+              );
+            })}
           </ListGroup>
         </div>
       </div>

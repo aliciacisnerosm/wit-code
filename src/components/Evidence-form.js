@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
+import axios from "axios";
 import "./Evidence-form.css";
 class EvidenceForm extends Component {
   constructor(props) {
@@ -12,14 +13,32 @@ class EvidenceForm extends Component {
   }
 
   onChangeFile(e) {
+    console.log(e.target.value)
     this.setState({ evidence: e.target.value });
   }
 
   onSubmit(e) {
     e.preventDefault();
 
+    const newEvidence = {
+      link: this.state.evidence,
+      entrega_type: "evidence",
+    };
+
+    axios
+      .post("https://wit-code-apis.herokuapp.com/entregas/", newEvidence, {
+        headers: { sessiontoken: localStorage.getItem("sessiontoken") },
+      })
+      .then((res) => {
+        // alert(res.user);
+        // localStorage.setItem('sessiontoken', res.data.token);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     this.setState({
-      registration_number: "",
       evidence: "",
     });
   }
@@ -44,7 +63,10 @@ class EvidenceForm extends Component {
               </div>
             </div>
 
-            <button className="submit-btn mt-5 p-3 flex-center">
+            <button
+              onClick={this.onSubmit}
+              className="submit-btn mt-5 p-3 flex-center"
+            >
               Subir Evidencia
             </button>
           </form>
