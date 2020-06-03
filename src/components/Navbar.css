@@ -3,6 +3,8 @@
   text-decoration: none;
   margin: 1%;
   min-width: 100px;
+  background-color: transparent;
+  border-color: transparent;
 }
 .navbar-btn-big {
   color: #4d5656;
