@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -41,7 +42,11 @@ class Login extends Component {
 
         localStorage.setItem('user', JSON.stringify(res.data.user));
 
-        this.props.history.push('/');
+        const { history } = this.props;
+        if(history) history.push('/');
+
+        this.props.setLogin(true);
+        this.props.setLogin(false);
       })
       .catch((error) => {
         console.log(error);
@@ -90,4 +95,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

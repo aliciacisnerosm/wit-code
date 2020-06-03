@@ -15,64 +15,83 @@ import CreateUser from "./components/auth/CreateUser";
 import Calendar from "./components/Calendar";
 import "./App.css";
 
-function App() {
-  const loggedIn = localStorage.getItem("user");
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar loggedIn={loggedIn} />
-        <div className="content">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/wit-code" component={WitCode} />
-          <Route exact path="/about-us" component={AboutUs} />
-          <Route
-            exact
-            path="/wit-code/login"
-            component={Login}
-          />
-          <Route exact path="/wit-code/calendar" component={Calendar} />
-          <GuardProvider guards={[requireLogin]}>
-            <GuardedRoute
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+
+    this.state = {
+      loggedIn: !!localStorage.getItem("user"),
+    };
+  }
+
+  handleLogin(loggedIn) {
+    this.setState({ loggedIn });
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Navbar loggedIn={this.state.loggedIn}/>
+          <div className="content">
+            <Route exact path="/" component={Home} />
+            <Route exact path="/wit-code" component={WitCode} />
+            <Route exact path="/about-us" component={AboutUs} />
+            <Route
               exact
-              path="/wit-code/create-user"
-              component={CreateUser}
-              meta={{ auth: true }}
+              path="/wit-code/login"
+              component={(routeProps) => (
+                <Login
+                  history={this.props.history}
+                  setLogin={this.handleLogin}
+                />
+              )}
             />
-            <GuardedRoute
-              exact
-              path="/evidence-form"
-              component={EvidenceForm}
-              meta={{ auth: true }}
-            />
-            <GuardedRoute
-              exact
-              path="/attendance-form"
-              component={AttendanceForm}
-              meta={{ auth: true }}
-            />
-            <GuardedRoute
-              exact
-              path="/evidence-list"
-              component={EvidenceList}
-              meta={{ auth: true }}
-            />
-            <GuardedRoute
-              exact
-              path="/attendance-list"
-              component={AttendanceList}
-              meta={{ auth: true }}
-            />
-            <GuardedRoute
-              exact
-              path="/wit-code/signup"
-              component={CreateUser}
-              meta={{ auth: true }}
-            />
-          </GuardProvider>
+            <Route exact path="/wit-code/calendar" component={Calendar} />
+            <GuardProvider guards={[requireLogin]}>
+              <GuardedRoute
+                exact
+                path="/wit-code/create-user"
+                component={CreateUser}
+                meta={{ auth: true }}
+              />
+              <GuardedRoute
+                exact
+                path="/evidence-form"
+                component={EvidenceForm}
+                meta={{ auth: true }}
+              />
+              <GuardedRoute
+                exact
+                path="/attendance-form"
+                component={AttendanceForm}
+                meta={{ auth: true }}
+              />
+              <GuardedRoute
+                exact
+                path="/evidence-list"
+                component={EvidenceList}
+                meta={{ auth: true }}
+              />
+              <GuardedRoute
+                exact
+                path="/attendance-list"
+                component={AttendanceList}
+                meta={{ auth: true }}
+              />
+              <GuardedRoute
+                exact
+                path="/wit-code/signup"
+                component={CreateUser}
+                meta={{ auth: true }}
+              />
+            </GuardProvider>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

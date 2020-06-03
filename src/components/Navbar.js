@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { Navbar, Nav } from "react-bootstrap";
+import { withRouter } from 'react-router-dom';
 
 class NavbarApp extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class NavbarApp extends Component {
       showCreateUser: false,
       showLogin: true,
       showLogout: false,
+      loggedIn: !!localStorage.getItem('user')
     };
     this.onClickLogout = this.onClickLogout.bind(this);
     //this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -68,7 +70,11 @@ class NavbarApp extends Component {
     this.setState({
       showLogin: true,
       showLogout: false,
+      loggedIn: false
     });
+    this.setNavbarValues();
+    const { history } = this.props;
+    if(history) history.push('/');
   }
 
   render() {
@@ -170,4 +176,4 @@ class NavbarApp extends Component {
   }
 }
 
-export default NavbarApp;
+export default withRouter(NavbarApp);
