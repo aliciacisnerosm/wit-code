@@ -12,14 +12,20 @@ class NavbarApp extends Component {
       showForms: false,
       showLists: false,
       showCreateUser: false,
+      showLogin: true,
+      showLogout: false
     };
+    this.onClickLogout = this.onClickLogout.bind(this);
+    //this.onChangeEmail = this.onChangeEmail.bind(this);
+
   }
   componentWillMount() {
-    let user = localStorage.getItem("user");
+    let user = JSON.parse(localStorage.getItem('user'));
     let showForms = false;
     let showLists = false;
     let showCreateUser = false;
-
+    console.log("this is the user:", user);
+    console.log(user?.user_type);
     if (user?.user_type === 1) {
       showForms = true;
     }
@@ -29,6 +35,12 @@ class NavbarApp extends Component {
     if (user?.user_type >= 3) {
       showCreateUser = true;
     }
+
+    if(user){
+      this.state.showLogin = false;
+      this.state.showLogout = true;
+    }
+
     this.setState({
       user,
       showForms,
@@ -37,9 +49,11 @@ class NavbarApp extends Component {
     });
   }
 
-  logout = () => {
+  onClickLogout(e) {
     localStorage.clear();
-  };
+    this.state.showLogin = true;
+    this.state.showLogout = false;
+  }
 
   render() {
     return (
@@ -110,7 +124,7 @@ class NavbarApp extends Component {
             <Link
               key={9}
               as={Link}
-              className={"navbar-btn ml-auto"}
+              className={"navbar-btn"}
               to={"/wit-code/signup"}
               hidden={!this.state.showCreateUser}
             >
@@ -121,16 +135,17 @@ class NavbarApp extends Component {
               as={Link}
               className={"navbar-btn ml-auto"}
               to={"/wit-code/login"}
-              hidden={this.state.user?.sessiontoken}
+              hidden={!this.state.showLogin}
             >
               Iniciar Sesion
             </Link>
+
             <button
+              onClick={this.onClickLogout}
               className="navbar-btn ml-auto"
-              onClick={this.logout()}
-              hidden={!this.state.user?.sessiontoken}
+              hidden={!this.state.showLogout}
             >
-              Cerrar Sesion
+              Cerrar sesión
             </button>
           </Nav>
         </Navbar.Collapse>

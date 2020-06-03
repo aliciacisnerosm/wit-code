@@ -36,11 +36,12 @@ class Login extends Component {
     axios
       .post('https://wit-code-apis.herokuapp.com/login', user)
       .then((res) => {
-        console.log(res);
-        alert('res', res);
+
         localStorage.setItem('sessiontoken', res.data.sessiontoken);
-        localStorage.setItem('user', res.data.user);
-        this.props.history.push('/wit-code/');
+
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+
+        this.props.history.push('/');
       })
       .catch((error) => {
         console.log(error);
