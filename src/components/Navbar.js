@@ -18,15 +18,26 @@ class NavbarApp extends Component {
     this.onClickLogout = this.onClickLogout.bind(this);
     //this.onChangeEmail = this.onChangeEmail.bind(this);
   }
+
   componentWillMount() {
+    this.setNavbarValues();
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.loggedIn !== this.props.loggedIn) {
+      this.setNavbarValues()
+    }
+  }
+
+  setNavbarValues() {
     let user = JSON.parse(localStorage.getItem("user"));
     let showForms = false;
     let showLists = false;
     let showCreateUser = false;
     let showLogin = true;
     let showLogout = false;
-    console.log("this is the user:", user);
-    console.log(user?.user_type);
+    // console.log("this is the user:", user);
+    // console.log(user?.user_type);
     if (user?.user_type === 1) {
       showForms = true;
     }
@@ -87,7 +98,7 @@ class NavbarApp extends Component {
               as={Link}
               className={"navbar-btn-big"}
               to={"/evidence-form"}
-              hidden={!this.showForms}
+              hidden={!this.state.showForms}
             >
               Subir Evidencia
             </Link>

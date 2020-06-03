@@ -15,61 +15,64 @@ import CreateUser from "./components/auth/CreateUser";
 import Calendar from "./components/Calendar";
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <Navbar />
-          <div className="content">
-            <Route exact path="/" component={Home} />
-            <Route exact path="/wit-code" component={WitCode} />
-            <Route exact path="/about-us" component={AboutUs} />
-            <Route exact path="/wit-code/login" component={Login} />
-            <Route exact path="/wit-code/calendar" component={Calendar} />
-            <GuardProvider guards={[requireLogin]}>
-              <GuardedRoute
-                exact
-                path="/wit-code/create-user"
-                component={CreateUser}
-                meta={{ auth: true }}
-              />
-              <GuardedRoute
-                exact
-                path="/evidence-form"
-                component={EvidenceForm}
-                meta={{ auth: true }}
-              />
-              <GuardedRoute
-                exact
-                path="/attendance-form"
-                component={AttendanceForm}
-                meta={{ auth: true }}
-              />
-              <GuardedRoute
-                exact
-                path="/evidence-list"
-                component={EvidenceList}
-                meta={{ auth: true }}
-              />
-              <GuardedRoute
-                exact
-                path="/attendance-list"
-                component={AttendanceList}
-                meta={{ auth: true }}
-              />
-              <GuardedRoute
-                exact
-                path="/wit-code/signup"
-                component={CreateUser}
-                meta={{ auth: true }}
-              />
-            </GuardProvider>
-          </div>
+function App() {
+  const loggedIn = localStorage.getItem("user");
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Navbar loggedIn={loggedIn} />
+        <div className="content">
+          <Route exact path="/" component={Home} />
+          <Route exact path="/wit-code" component={WitCode} />
+          <Route exact path="/about-us" component={AboutUs} />
+          <Route
+            exact
+            path="/wit-code/login"
+            component={Login}
+          />
+          <Route exact path="/wit-code/calendar" component={Calendar} />
+          <GuardProvider guards={[requireLogin]}>
+            <GuardedRoute
+              exact
+              path="/wit-code/create-user"
+              component={CreateUser}
+              meta={{ auth: true }}
+            />
+            <GuardedRoute
+              exact
+              path="/evidence-form"
+              component={EvidenceForm}
+              meta={{ auth: true }}
+            />
+            <GuardedRoute
+              exact
+              path="/attendance-form"
+              component={AttendanceForm}
+              meta={{ auth: true }}
+            />
+            <GuardedRoute
+              exact
+              path="/evidence-list"
+              component={EvidenceList}
+              meta={{ auth: true }}
+            />
+            <GuardedRoute
+              exact
+              path="/attendance-list"
+              component={AttendanceList}
+              meta={{ auth: true }}
+            />
+            <GuardedRoute
+              exact
+              path="/wit-code/signup"
+              component={CreateUser}
+              meta={{ auth: true }}
+            />
+          </GuardProvider>
         </div>
-      </BrowserRouter>
-    );
-  }
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
